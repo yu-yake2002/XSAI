@@ -852,11 +852,6 @@ class CtrlBlockImp(
   io.robio.commitMType := rob.io.toDecode.commitMType
   // exu block to decode
   decode.io.msettypeMType := io.toDecode.msettypeMType
-  // backend to decode
-  decode.io.mstart := io.toDecode.mstart
-  // backend to rob
-  rob.io.mstartIsZero := io.toDecode.mstart === 0.U
-
 
   io.debugTopDown.fromRob := rob.io.debugTopDown.toCore
   dispatch.io.debugTopDown.fromRob := rob.io.debugTopDown.toDispatch
@@ -998,7 +993,6 @@ class CtrlBlockIO()(implicit p: Parameters, params: BackendParams) extends XSBun
     val vsetvlVType = Input(VType())
     val vstart = Input(Vl())
     val msettypeMType = Input(MType())
-    val mstart = Input(Vl()) // FIXME: don't use Vl here
   }
 
   val fromVecExcpMod = Input(new Bundle {
